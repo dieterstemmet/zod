@@ -34,7 +34,7 @@ z.$ZodError;
 {} as z.$ZodIssue;
 
 // utils
-z.util.isValidJWT(...);
+z.isValidJWT(...);
 ```
 
 ## Schemas
@@ -247,11 +247,11 @@ await z.safeParseAsync(schema, "hello");
 Every Zod schema contains an array of *checks*. These perform post-parsing refinements (and occasionally mutations) that *do not affect* the inferred type.
 
 ```ts
-const schema = z.string().check(z.email()).check(z.min(5));
+const schema = z.string().check(z.email()).check(z.minLength(5));
 // => $ZodString
 
 schema._zod.def.checks;
-// => [$ZodCheckEmail, $ZodCheckMinLength]
+// => [$ZodEmail, $ZodCheckMinLength]
 ```
 
 The base class for all Zod checks is `$ZodCheck`. It accepts a single generic parameter `T`.
